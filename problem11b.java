@@ -27,8 +27,7 @@ The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
 
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 */
-import java.lang.StringBuilder;
-public class problem11{
+public class problem11b{
       public static void main(String args[]){
            long grid[][] = {   {8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8},
                               {49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,4,56,62,0},
@@ -50,38 +49,34 @@ public class problem11{
                               {20,69,36,41,72,30,23,88,34,62,99,69,82,67,59,85,74,4,36,16},
                               {20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54},
                               {1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48}};
-            System.out.println(grid[6][8]);                 //[y][x]
+
             int y = 6; int x = 8;
-            long result1,result2,result3,result4,result5,result6,result7,result8;
-            result1=result2=result3=result4=result5=result6=-1L;
-            long biggest = -1;
-            result1 = diagMult(grid, y-1, x-1);
-            if(biggest<result1) biggest = result1;
-            result2 = diagMult(grid, y-1, x);
-            if(biggest<result2) biggest = result2;
-            result3 = diagMult(grid, y-1, x+1);
-            if(biggest<result3) biggest = result3;
-            result4 = diagMult(grid, y, x+1);
-            if(biggest<result4) biggest = result4;
-            result5 = diagMult(grid, y+1, x+1);
-            if(biggest<result5) biggest = result5;
-            result6 = diagMult(grid, y+1, x);
-            if(biggest<result6) biggest = result6;
-            result7 = diagMult(grid, y+1, x-1);
-            if(biggest<result7) biggest = result7;
-            result8 = diagMult(grid, y, x-1);
-            if(biggest<result8) biggest = result8;
+            int dir[][] ={{-1,-1},
+                          {-1,0},
+                          {-1,1},
+                          {0,1},
+                          {1,1},
+                          {1,0},
+                          {1,-1},
+                          {0,-1}};
+            long biggest = -1L;
+            for(int i = 3; i <=16; i++){
+                  for(int j = 3; j <= 16; j++){
+                        for(int k = 0; k <= 7; k++){
+                              long result = diagMult(grid, dir[k][0], dir[k][1], j, i );
+                              if(result>biggest)biggest = result;
+                        }
+                  }
+            }
             System.out.println(biggest);
             
       }
-      private static long diagMult(long grid[][], int y, int x){
+      private static long diagMult(long grid[][], int y, int x, int locy, int locx){
             long result = 1L;
             StringBuilder build = new StringBuilder();
             for(int i=0; i< 4; i++){
-                  build.append(" " +grid[y+i][x+i]);
-                  result *= grid[y+i][x+i];
+                  result *= grid[locy+(y*i)][locx+(x*i)];
             }
-            System.out.println(build.toString() );
             return result;
       }
 }

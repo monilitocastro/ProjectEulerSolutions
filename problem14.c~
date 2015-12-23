@@ -1,0 +1,41 @@
+#include <stdio.h>
+int main(){
+      long count = 0L;
+      long biggest = -1L;
+      long start = -1L;
+      long i;
+      long result = -1L;
+      for(i=2; i< 1000000L;i++){
+            count = 0;
+            result = i;
+            while(result!=1L){
+            //if(i%32==0)printf("i=%d start=%d  count=%d biggest=%d\n ",i,start,count,biggest);
+                  if(result!=-1){
+                  bool out = true;
+                        if(result%2==0){
+                              result /= 2;
+                              out=false;
+                        }else{
+                              result = 3*result+1;
+                              out=false;
+                        }
+                        count++;
+                        if(out==true){
+                              printf("Out\n");
+                              return 0;
+                        }
+                  }else{
+                        printf("Error\n");
+                        return 0;
+                  }
+            }
+            if(count>biggest){
+                  biggest = count;
+                  start = i;
+            }
+            if(i%32L==0L)printf("i=%ld start=%ld  count=%ld biggest=%ld\n ",i,start,count,biggest);
+      }
+      printf("start=%ld  count=%ld\n ",start,count);
+
+return 0;
+}

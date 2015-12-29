@@ -15,10 +15,16 @@ int main(){
             }
             //r++;
             if(sum>i){
-                  printf("abundant %d\n", i);
+                  //printf("abundant %d\n", i);
                   arr[max++]=i;
             }
             //if(r!=i)exit(0);
+      }
+      for(i = 0; i < max; i++){
+            int j;
+            for(j=0; j < max; j++){
+                  
+            }
       }
 
 return 0;
